@@ -1,8 +1,9 @@
 <?php 
-echo "bonjour \r\n";
-echo password_hash("bonjour", PASSWORD_DEFAULT). "\r\n";
+PHPinfo();
 
-if (password_verify("bonjour", '$2y$10$Shl3q15HfAy8UhJ7shH4bO2N7LsytKrb7o5fsHPNeqvlrl0w4.4oO')) {
+echo password_hash("kangourou", PASSWORD_DEFAULT). "\r\n";
+
+if (password_verify("kangourou", '$2y$10$3GdWxyFLn.5iP4EOZiEYVOv49eqbzX8SK6q6kSm9TCZPRinaVaLS2')) {
     echo "ok";
 }
 

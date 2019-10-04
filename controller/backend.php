@@ -4,6 +4,22 @@ require_once('model/backend/adminArticleManager.php');
 require_once('model/backend/adminCommentManager.php');
 
 
+function passwordVerify($pseudo, $password) {
+$adminArticleManager = new AdminArticleManager();
+$userCheck = $adminArticleManager -> verifyUser($pseudo, $password);
+
+if (password_verify($password, $userCheck['password_H']))  {
+    echo "YES";
+   return true;
+   }
+else {
+    header('Location: view/frontend/loginView.php');
+}
+
+}
+
+
+
 function listArticles()
 {
   
@@ -11,6 +27,7 @@ function listArticles()
     $adminArticles = $adminArticleManager->getArticles();
     
     require('view/backend/adminView.php');
+
 
 }
 

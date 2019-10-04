@@ -4,6 +4,17 @@ require_once('model/frontend/articleManager.php');
 class AdminArticleManager extends ArticleManager {
 
 
+    public function verifyUser($pseudo, $password)  {
+        $bdd = $this->bddConnect();
+        $req= $bdd->prepare('SELECT password_H FROM Utilisateurs WHERE pseudo=? ');
+        $req->execute(array($pseudo));
+        $user = $req->fetch();
+    
+       return $user;
+
+}
+
+
 public function createArticle($titre, $contenu)  {
 
         $bdd = $this->bddConnect();

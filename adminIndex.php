@@ -1,68 +1,84 @@
 <?php
-    session_start();
-
-    require('controller/backend.php');
-
+session_start();
+require('controller/backend.php');
 
 
+try {
+    
+    if (isset($_POST['pseudo'])  && isset($_POST['password'])){
+       
+        if  (!empty($_POST['pseudo']) AND !empty($_POST['password'])) {
+            
+            if(passwordVerify($_POST['pseudo'], $_POST['password'])) {
 
-    try {
-        if  (isset($_SESSION['pseudo']) && isset($_SESSION['password'])){
-        if  ($_SESSION['pseudo'] === "jeanF" && $_SESSION['password'] === "kangourou"){
+                $_SESSION['pseudo'] = $_POST['pseudo'];
+                $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                listArticles();
+            }
 
-            if (isset($_GET['action'])){
+            else {
+                throw new Exception("Vérifier votre pseudo et/ou mot de passe ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
+                header('Location: view/frontend/loginView.php');
+            }
 
-                if ($_GET['action'] == 'list') {
+        }
+
+        else {
+            throw new Exception('Les deux identifiants sont obligatoires.  Essayez ici: <a href="view/frontend/loginView.php"> Connexion</a>  ');
+        }
+
+    }
+
+    elseif (isset($_SESSION['password']) && isset($_SESSION['pseudo'])) {
+
+        if (isset($_GET['action'])) {
+
+            switch($_GET['action']) {
+
+                case 'list':
                     listArticles();
-                }
+                    break;
 
-                elseif ($_GET['action'] == 'newArticle') {
-                        if (!empty($_POST['titre']) && !empty($_POST['contenu'])){
-                            newArticle($_POST['titre'], $_POST['contenu']);
-                        
-                        }
-
+                case  'newArticle':
+                    if (!empty($_POST['titre']) && !empty($_POST['contenu'])){
+                        newArticle($_POST['titre'], $_POST['contenu']);
                     }
+                    else {
+                        throw new Exception('impossible d\'ajouter l\'article ');
+                    }
+                    break;
 
-                elseif ($_GET['action'] == 'deleteArticle')  {
-                    
+                case 'deleteArticle':
                     if (isset($_GET['id']) && $_GET['id'] >= 0) {
-                        
                         deletionArticle($_GET['id']);
                     }
                     else {
                         throw new Exception('Aucun identifiant de billet envoyé');
                     }
+                    break;
 
-                }
-
-                elseif ($_GET['action'] == 'getArticle')  {
-                    
+                case 'getArticle':
                     if (isset($_GET['id']) && $_GET['id'] >= 0) {
-
                         getArticleByTitre($_GET['id']);
-                
-                }
+                    }
+                    else {
+                        throw new Exception('Aucun identifiant de billet envoyé');
+                    }
+                    break;
 
-                else {
-                    throw new Exception('Aucun identifiant de billet envoyé');
-                }
-                }
-
-
-                elseif ($_GET['action'] == 'listCommentaires') {
+                case 'listCommentaires':
                     if (isset($_GET['id']) && $_GET['id'] >= 0) {
                         listCommentaires();
                     }
                     else {
                         throw new Exception('Aucun identifiant de billet envoyé');
                     }
-                }
+                    break;
 
-                elseif ($_GET['action'] == 'deleteCommentaire') {
+                case 'deleteCommentaire':
                     if (isset($_GET['id']) && $_GET['id'] >= 0) {
                         if (isset($_GET['articleId']) && $_GET['articleId'] >= 0) {
-                        deletionCommentaire($_GET['articleId'], $_GET['id']);
+                            deletionCommentaire($_GET['articleId'], $_GET['id']);
                         }
                         else {
                             throw new Exception('Aucun identifiant de article envoyé');
@@ -71,21 +87,17 @@
                     else {
                         throw new Exception('Aucun identifiant de commentaire envoyé');
                     }
-                }
+                    break;
 
-
-                elseif ($_GET['action'] == 'signalCommentaire') {
+                case 'signalCommentaire':
                     if (isset($_GET['id']) && $_GET['id'] >= 0) {
                         if (isset($_GET['articleId']) && $_GET['articleId'] >= 0) {
                             if ($_GET['moderation'] != 1){
-                        moderationCommentaire($_GET['articleId'], $_GET['id']);
-                        
-                    }
-
-                    elseif ($_GET['moderation'] = 1){
-                        echo 'Ce commentaire a déjà été signalé ! ';
-                    }
-
+                                moderationCommentaire($_GET['articleId'], $_GET['id']);
+                            }
+                            elseif ($_GET['moderation'] = 1){
+                                echo 'Ce commentaire a déjà été signalé ! ';
+                            }
                         }
                         else {
                             throw new Exception('Aucun identifiant de article envoyé');
@@ -94,39 +106,32 @@
                     else {
                         throw new Exception('Aucun identifiant de commentaire envoyé');
                     }
-                }
+                    break;
 
-
-
-                elseif ($_GET['action'] == 'listCommentairesAModerer') {
-                  
+                case 'listCommentairesAModerer':
                     listCommentairesAModerer();
-                    
-                }
-
-
-
-               
-
-            
+                    break;
+            }
         }
-        else {
+
+        elseif (!isset($_GET['action'])){
+            echo "NO";
             listArticles();
         }
-
-            }
-            else {
-                throw new Exception('Vérifiez votre pseudo et / ou mot de passe');
-            }
-        }
-            else {
-                throw new Exception('<h2>Vous devez vous connecter ! <a href="view/frontend/loginView.php">Cliquez ici</a></h2>' );
-            }
-        }
-
-    catch (Exception $e) { 
-        echo 'Erreur : ' . $e->getMessage();
     }
+
+    else {
+        throw new Exception("Vous devez vous reconnecter ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
+        header('Location: view/frontend/loginView.php');
+    }
+
+
+}
+
+
+catch (Exception $e) {
+    echo 'Erreur : ' . $e->getMessage();
+}
 ?>
 
 

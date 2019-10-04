@@ -26,4 +26,6 @@ class ArticleManager extends Manager {
 
     }
 
+    
+
 }
