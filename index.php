@@ -7,6 +7,7 @@ if (isset($_GET['action'])) {
     if ($_GET['action'] == 'listArticles') {
         listArticles();
     }
+
     elseif ($_GET['action'] == 'listCommentaires') {
         if (isset($_GET['id']) && $_GET['id'] >= 0) {
             listCommentaires();
@@ -27,6 +28,22 @@ if (isset($_GET['action'])) {
         }
         else {
             throw new Exception('Aucun identifiant de billet envoyé');
+        }
+    }
+
+    elseif ($_GET['action'] =='signalCommentaire'){
+        if (isset($_GET['id']) && $_GET['id'] >= 0) {
+            if (isset($_GET['articleId']) && $_GET['articleId'] >= 0) {
+                if ($_GET['moderation'] != 1){
+                    moderationCommentaire($_GET['articleId'], $_GET['id']);
+                }  
+            }
+            else {
+                throw new Exception('Aucun identifiant de article envoyé');
+            }
+        }
+        else {
+            throw new Exception('Aucun identifiant de commentaire envoyé');
         }
     }
 }

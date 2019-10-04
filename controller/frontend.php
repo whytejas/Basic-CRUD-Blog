@@ -1,7 +1,6 @@
 <?php
 
-require_once('model/frontend/articleManager.php');
-require_once('model/frontend/commentManager.php');
+require_once('model/model.php');
 
 
 function listArticles()
@@ -35,4 +34,18 @@ function newCommentaire($articleId, $auteur, $commentaireContenu)
         else {
             header('Location: ./index.php?action=listCommentaires&id=' . $articleId);
         }
+}
+
+
+function moderationCommentaire($articleId, $commentaireId)
+{
+    $adminArticleManager = new AdminArticleManager();
+    $adminCommentManager = new AdminCommentManager();
+    $modererComment =  $adminCommentManager->modererCommentaire($commentaireId);
+
+    header('Location: ./index.php?action=listCommentaires&id=' . $articleId);
+
+
+
+
 }

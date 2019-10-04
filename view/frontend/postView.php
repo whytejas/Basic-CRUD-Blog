@@ -26,7 +26,7 @@ ob_start(); ?>
             <input type="text" id="auteur" name="auteur" /><br /><br />
             <label for="commentaireContenu">Commentaire :</label><br />
             <textarea id="commentaireContenu" name="commentaireContenu" rows="15" cols="30"></textarea><br /><br />
-            <input type="submit" />
+            <input type="submit" value ="Envoyer" />
         </div>
     </form>
    
@@ -45,7 +45,7 @@ ob_start(); ?>
         if ($commentaire['moderation'] != 1 ) {
         ?>
         
-        <span class="moderation"><a href="./adminIndex.php?action=signalCommentaire&id=<?php echo $commentaire['id']; ?>&moderation=<?php echo $commentaire['moderation']; ?>&articleId=<?php echo $article['id']; ?>" onclick="return confirm('Êtes-vous sûr et certain? Cette action est permanente !')">Signaler pour modération</a></span></p> 
+        <span class="moderation"><a href="./index.php?action=signalCommentaire&id=<?php echo $commentaire['id']; ?>&moderation=<?php echo $commentaire['moderation']; ?>&articleId=<?php echo $article['id']; ?>" onclick="return confirm('Êtes-vous sûr et certain? Cette action est permanente !')">Signaler pour modération</a></span></p> 
         <?php } ?>
     </div>
 

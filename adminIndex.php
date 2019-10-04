@@ -89,25 +89,6 @@ try {
                     }
                     break;
 
-                case 'signalCommentaire':
-                    if (isset($_GET['id']) && $_GET['id'] >= 0) {
-                        if (isset($_GET['articleId']) && $_GET['articleId'] >= 0) {
-                            if ($_GET['moderation'] != 1){
-                                moderationCommentaire($_GET['articleId'], $_GET['id']);
-                            }
-                            elseif ($_GET['moderation'] = 1){
-                                echo 'Ce commentaire a déjà été signalé ! ';
-                            }
-                        }
-                        else {
-                            throw new Exception('Aucun identifiant de article envoyé');
-                        }
-                    }
-                    else {
-                        throw new Exception('Aucun identifiant de commentaire envoyé');
-                    }
-                    break;
-
                 case 'listCommentairesAModerer':
                     listCommentairesAModerer();
                     break;

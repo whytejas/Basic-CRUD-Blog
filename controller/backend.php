@@ -1,7 +1,6 @@
 <?php
 
-require_once('model/backend/adminArticleManager.php');
-require_once('model/backend/adminCommentManager.php');
+require_once('model/model.php');
 
 
 function passwordVerify($pseudo, $password) {
@@ -68,20 +67,6 @@ function deletionCommentaire($articleId, $commentaireId)
 
 }
 
-
-
-function moderationCommentaire($articleId, $commentaireId)
-{
-    $adminArticleManager = new AdminArticleManager();
-    $adminCommentManager = new AdminCommentManager();
-    $modererComment =  $adminCommentManager->modererCommentaire($commentaireId);
-
-    header('Location: ./index.php?action=listCommentaires&id=' . $articleId);
-
-
-
-
-}
 
 
 function listCommentairesAModerer() {
