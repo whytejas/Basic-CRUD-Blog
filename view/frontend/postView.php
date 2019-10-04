@@ -39,12 +39,21 @@ ob_start(); ?>
         <div class="commentaires"><p><strong><?= htmlspecialchars($commentaire['auteur']) ?></strong> a commenté le
             <?= $commentaire['date_commentaire'] ?></p>
         <p class="commentaireContenu"><?= nl2br(htmlspecialchars($commentaire['contenu'])) ?>
-        <br><br><span class="moderation"><a href="./adminIndex.php?action=signalCommentaire&id=<?php echo $commentaire['id']; ?>&moderation=<?php echo $commentaire['moderation']; ?>&articleId=<?php echo $article['id']; ?>" onclick="return confirm('Êtes-vous sûr et certain? Cette action est permanente !')">Signaler pour modération</a></span></p>
+        <br><br>
+        
+        <?php
+        if ($commentaire['moderation'] != 1 ) {
+        ?>
+        
+        <span class="moderation"><a href="./adminIndex.php?action=signalCommentaire&id=<?php echo $commentaire['id']; ?>&moderation=<?php echo $commentaire['moderation']; ?>&articleId=<?php echo $article['id']; ?>" onclick="return confirm('Êtes-vous sûr et certain? Cette action est permanente !')">Signaler pour modération</a></span></p> 
+        <?php } ?>
     </div>
 
     
 </div>
 <?php
+         
+    
         }
       
     $commentaires->closeCursor();

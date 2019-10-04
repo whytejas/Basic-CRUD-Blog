@@ -1,20 +1,20 @@
-<?php 
+<?php
 
 require_once('model/backend/adminArticleManager.php');
 require_once('model/backend/adminCommentManager.php');
 
 
 function passwordVerify($pseudo, $password) {
-$adminArticleManager = new AdminArticleManager();
-$userCheck = $adminArticleManager -> verifyUser($pseudo, $password);
+    $adminArticleManager = new AdminArticleManager();
+    $userCheck = $adminArticleManager -> verifyUser($pseudo, $password);
 
-if (password_verify($password, $userCheck['password_H']))  {
-    echo "YES";
-   return true;
-   }
-else {
-    header('Location: view/frontend/loginView.php');
-}
+    if (password_verify($password, $userCheck['password_H']))  {
+
+        return true;
+    }
+    else {
+        header('Location: view/frontend/loginView.php');
+    }
 
 }
 
@@ -22,10 +22,10 @@ else {
 
 function listArticles()
 {
-  
+
     $adminArticleManager = new AdminArticleManager();
     $adminArticles = $adminArticleManager->getArticles();
-    
+
     require('view/backend/adminView.php');
 
 
@@ -36,60 +36,60 @@ function listArticles()
 
 function newArticle($titre, $contenu)
 {
-        $adminArticleManager = new AdminArticleManager();
-        $insertionArticle =  $adminArticleManager->createArticle($titre, $contenu);
+    $adminArticleManager = new AdminArticleManager();
+    $insertionArticle =  $adminArticleManager->createArticle($titre, $contenu);
 
-        if ($insertionArticle === false) {
-            throw new Exception("Impossible d\'ajouter l'article !");
-        }
-        else {
-            header('Location: ./adminIndex.php?action=list');
-        }
+    if ($insertionArticle === false) {
+        throw new Exception("Impossible d\'ajouter l'article !");
+    }
+    else {
+        header('Location: ./adminIndex.php?action=list');
+    }
 
 }
 
 
 function deletionArticle($articleId)
-{  
-        $adminArticleManager = new AdminArticleManager();
-        $deletion =  $adminArticleManager->deleteArticle($articleId);
-            header('Location: ./adminIndex.php?action=list');
-        
-    }
-
-
-    function deletionCommentaire($articleId, $commentaireId)
-{  
-   
-        $adminCommentManager = new AdminCommentManager();
-        $deletionComment =  $adminCommentManager->deleteCommentaire($commentaireId);
-        header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
-     
-        
-    }
-
-
-
-    function moderationCommentaire($articleId, $commentaireId)
-{  
+{
     $adminArticleManager = new AdminArticleManager();
-        $adminCommentManager = new AdminCommentManager();
-        $modererComment =  $adminCommentManager->modererCommentaire($commentaireId);
-        
-        header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
-        
-       
-     
-        
-    }
+    $deletion =  $adminArticleManager->deleteArticle($articleId);
+    header('Location: ./adminIndex.php?action=list');
+
+}
 
 
-    function listCommentairesAModerer() {
-        $adminCommentManager = new AdminCommentManager();
-        $commentsAModerer =  $adminCommentManager->commentairesAModerer();
-        require('view/backend/adminCommentView.php');
+function deletionCommentaire($articleId, $commentaireId)
+{
 
-    }
+    $adminCommentManager = new AdminCommentManager();
+    $deletionComment =  $adminCommentManager->deleteCommentaire($commentaireId);
+    header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
+
+
+}
+
+
+
+function moderationCommentaire($articleId, $commentaireId)
+{
+    $adminArticleManager = new AdminArticleManager();
+    $adminCommentManager = new AdminCommentManager();
+    $modererComment =  $adminCommentManager->modererCommentaire($commentaireId);
+
+    header('Location: ./index.php?action=listCommentaires&id=' . $articleId);
+
+
+
+
+}
+
+
+function listCommentairesAModerer() {
+    $adminCommentManager = new AdminCommentManager();
+    $commentsAModerer =  $adminCommentManager->commentairesAModerer();
+    require('view/backend/adminCommentView.php');
+
+}
 
 
 function getArticleByTitre($articleId) {
@@ -108,7 +108,7 @@ function getArticleByTitre($articleId) {
     else {
         require('view/backend/adminArticleView.php');
     }
-   
+
 
 
 }
