@@ -44,6 +44,7 @@ class ArticleManager extends Manager {
 
     }
 
+
 }
 
 // COMMENT MANAGER : LECTEURS
@@ -115,9 +116,29 @@ public function createArticle($titre, $contenu)  {
 
 }
 
-public function editArticle($articleId) {
+public function modifierArticle($articleId) {
+    
+    $bdd = $this->bddConnect();
+    $req = $bdd->prepare('SELECT id, titre, contenu, DATE_FORMAT(date_article, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation FROM Articles WHERE id = ?');
+    $req->execute(array($articleId));
+    $article = $req->fetch();
+
+    return $article;
 
 }
+
+public function updateArticle($articleId,$modTitre, $modContenu) {
+    
+    $bdd = $this->bddConnect();
+    $req = $bdd->prepare('UPDATE Articles SET titre = ?, contenu = ?, date_article = NOW() WHERE id = ? ');
+    $req->execute(array($modTitre, $modContenu,$articleId));
+
+    return $req;
+
+}
+
+
+
 public function deleteArticle($articleId) {
     
     $bdd = $this->bddConnect();

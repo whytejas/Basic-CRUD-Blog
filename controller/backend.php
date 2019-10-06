@@ -57,6 +57,30 @@ function deletionArticle($articleId)
 }
 
 
+function modificationArticle($articleId)
+{
+    $adminArticleManager = new AdminArticleManager();
+    $article = $adminArticleManager->getArticle($articleId);
+    require('view/backend/adminModificationView.php');
+
+}
+
+function updateArticle($articleId, $modTitre, $modContenu)
+{
+    $adminArticleManager = new AdminArticleManager();
+    $updateArticle = $adminArticleManager->updateArticle($articleId, $modTitre, $modContenu);
+    
+    if ($updateArticle === false) {
+        throw new Exception("Impossible de modifier cet article !");
+    }
+    else {
+        header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
+    }
+   
+
+}
+
+
 function deletionCommentaire($articleId, $commentaireId)
 {
 

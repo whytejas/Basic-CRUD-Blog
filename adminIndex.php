@@ -57,6 +57,15 @@ try {
                     }
                     break;
 
+                case 'getArticleMod':
+                    if (isset($_GET['id']) && $_GET['id'] >= 0) {
+                        modificationArticle($_GET['id']);
+                    }
+                    else {
+                        throw new Exception('Aucun identifiant de billet envoyé');
+                    }
+                    break;    
+
                 case 'getArticle':
                     if (isset($_GET['id']) && $_GET['id'] >= 0) {
                         getArticleByTitre($_GET['id']);
@@ -65,6 +74,21 @@ try {
                         throw new Exception('Aucun identifiant de billet envoyé');
                     }
                     break;
+
+
+                case 'updateArticle': 
+                    if (isset($_GET['id']) && $_GET['id'] >= 0) {
+                        if (!empty($_POST['titre']) && !empty($_POST['contenu'])) {
+                                updateArticle($_GET['id'], $_POST['titre'], $_POST['contenu']);
+                        }
+                        else {
+                            throw new Exception('Tous les champs ne sont pas remplis !');
+                        }
+                    }
+                    else {
+                        throw new Exception('Aucun identifiant de billet envoyé');
+                    }
+                    break;   
 
                 case 'listCommentaires':
                     if (isset($_GET['id']) && $_GET['id'] >= 0) {
