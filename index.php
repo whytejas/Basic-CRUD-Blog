@@ -3,12 +3,24 @@ require('controller/frontend.php');
 
 
 try {
+
     if (isset($_GET['action'])) {
 
         switch($_GET['action']) {
 
             case 'listArticles': 
-                listArticles();
+                if ((isset($_GET['page'])) && ((int)$_GET['page'])){
+                    $page = $_GET['page'];
+                    
+                    if ((isset($_GET['perpage'])) && ((int)$_GET['perpage']) && $_GET['perpage'] <= 10) {
+                    $perPage = $_GET['perpage'];
+                    }
+                    else { 
+                        
+                        $perPage = 1;
+                    } 
+                listArticles($page, $perPage);        
+                }
                 break;
         
             
@@ -56,7 +68,8 @@ try {
     }
 
 else {
-    listArticles();
+
+    listArticles(1, 3);
 }
 
 }

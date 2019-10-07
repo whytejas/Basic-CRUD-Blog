@@ -37,7 +37,7 @@ try {
                         newArticle($_POST['titre'], $_POST['contenu']);
                     }
                     else {
-                        throw new Exception('impossible d\'ajouter l\'article ');
+                        throw new Exception('Impossible d\'ajouter l\'article ! ');
                     }
                     break;
 
@@ -112,9 +112,8 @@ try {
             }
         }
 
-        // elseif (!isset($_GET['action'])){
-        //     listArticles();
-        // }
+
+        
     }
 
 

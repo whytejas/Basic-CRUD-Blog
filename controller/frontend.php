@@ -3,12 +3,23 @@ require_once('model/articleManager.php');
 require_once('model/commentManager.php');
 
 
-function listArticles()
+function listArticles($page, $perPage)
 {
+    if ($page > 1) {
+        $start = ($page - $perPage) * $perPage;  
+    }
+    
+    else {
+        $start = 0;
+    }
+    
     $articleManager = new ArticleManager();
-    $articles = $articleManager->getArticles();
-
-    require('view/frontend/mainView.php');
+    $articles = $articleManager->paginateArticles($start, $perPage);
+    
+    $total = $articleManager->totalArticles();
+    $totalPages = ceil($total/$perPage);
+    
+    require('view/frontend/view.php');
 }
 
 function listCommentaires()

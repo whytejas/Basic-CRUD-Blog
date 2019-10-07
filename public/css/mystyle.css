@@ -9,7 +9,8 @@ h4,
 .intro,
 .commentaires,
 .formulaire,
-.loginForm {
+.loginForm,
+.pagination {
     text-align: center;
 }
 

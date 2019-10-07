@@ -82,9 +82,10 @@ function updateArticle($articleId, $modTitre, $modContenu)
 
 function deletionCommentaire($articleId, $commentaireId)
 {
-
+    $articleManager = new ArticleManager();
     $commentManager = new CommentManager();
     $deletionComment =  $commentManager->deleteCommentaire($commentaireId);
+    
     header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
 
 }

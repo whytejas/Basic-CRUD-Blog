@@ -11,6 +11,26 @@ class ArticleManager extends Manager {
         
         return $req;
 
+       
+
+    }
+
+    public function paginateArticles($start, $perPage) {
+
+        $bdd = $this->bddConnect();
+        $articles = $bdd->prepare("SELECT * FROM Articles LIMIT $start, $perPage" );
+        $articles->execute();
+        return $articles;
+    }
+
+
+    public function totalArticles(){
+        
+        $bdd = $this->bddConnect();
+        $req = $bdd->query("SELECT COUNT(*)AS total FROM Articles");
+        $total = $req->fetch()['total'];
+        return $total;
+
     }
 
     public function getArticle($articleId) {
