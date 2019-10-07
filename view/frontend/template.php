@@ -7,7 +7,20 @@
         <title><?php echo $title ?></title>
         <link href="https://fonts.googleapis.com/css?family=Dosis:400,500,600,700,800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="http://localhost:8888/projet4_OC/public/css/mystyle.css" type="text/css">
-    </head>
+
+        <script src='https://cdn.tiny.cloud/1/4fq6p6frhqgs06ikee1ufp208mud2qcakkfevk8gmyccy0yq/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector: '.mytextarea',
+                invalid_elements : 'strong,em,p,div,br',
+                force_br_newlines : false,
+                force_p_newlines : false,
+                forced_root_block : '',
+                language: 'fr_FR',
+                language_url : 'public/fr_FR.js'
+            });
+        </script>
+</head>
 <body>
 
 <?php 
