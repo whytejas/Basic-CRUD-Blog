@@ -5,27 +5,24 @@ require('controller/backend.php');
 try {
     
     if (!isset($_GET['action']) OR $_GET['action'] == 'login')  {
-
+        
         if (isset($_POST['pseudo'])  && isset($_POST['password'])){
-       
-        if  (!empty($_POST['pseudo']) AND !empty($_POST['password'])) {
             
-            passwordVerify($_POST['pseudo'], $_POST['password']); 
+            if  (!empty($_POST['pseudo']) AND !empty($_POST['password'])) {
+                
+                passwordVerify($_POST['pseudo'], $_POST['password']); 
             
+            }
+            else {
+                throw new Exception('Les deux identifiants sont obligatoires.  Essayez ici: <a href="view/frontend/loginView.php"> Connexion</a>  ');
+            }
         }
-
-        else {
-            throw new Exception('Les deux identifiants sont obligatoires.  Essayez ici: <a href="view/frontend/loginView.php"> Connexion</a>  ');
-        }
-
     }
 
-}
-
     elseif (isset($_SESSION['password']) && isset($_SESSION['pseudo'])) {
-
+        
         if (isset($_GET['action'])) {
-
+            
             switch($_GET['action']) {
 
                 case 'list':
@@ -68,7 +65,6 @@ try {
                     }
                     break;
 
-
                 case 'updateArticle': 
                     if (isset($_GET['id']) && $_GET['id'] >= 0) {
                         if (!empty($_POST['titre']) && !empty($_POST['contenu'])) {
@@ -109,17 +105,20 @@ try {
                 case 'listCommentairesAModerer':
                     listCommentairesAModerer();
                     break;
+                
+                case 'logout':
+                    session_destroy();
+                    echo "<h1>Votre session est terminée. <br><br> Vous devez vous reconnecter ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a></h1> ";
+                    break;
             }
         }
-
-
         
     }
 
 
 
     else {
-        throw new Exception("Vous devez vous reconnecter ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
+        throw new Exception("Vous devez vous connecter ! <br><br>Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
         header('Location: view/frontend/loginView.php');
     }
 
@@ -128,7 +127,7 @@ try {
 
 
 catch (Exception $e) {
-    echo 'Erreur : ' . $e->getMessage();
+    echo "<h1>". $e->getMessage() . "</h1>";
 }
 ?>
 

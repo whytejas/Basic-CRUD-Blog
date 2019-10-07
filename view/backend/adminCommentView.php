@@ -2,7 +2,8 @@
 <?php ob_start(); ?>
 
 
-
+<p><a class="accueil" href="./index.php">Accueil</a>
+<a class="logout" href="./adminIndex.php?action=logout">Logout</a></p>
 
 <div>
 

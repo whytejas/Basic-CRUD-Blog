@@ -1,7 +1,8 @@
 <?php $title = 'Article:' .$article['titre']; ?>
 <?php ob_start(); ?>
 
-<p><a class="login" href="./adminIndex.php?action=list">Espace Admin</a></p>
+<p><a class="accueil" href="./index.php">Accueil</a>
+<a class="logout" href="./adminIndex.php?action=logout">Logout</a></p>
 
 <h4>"Billet simple pour l'Alaska"</h4>
 <h3><?php echo $article['titre']; ?></h3>

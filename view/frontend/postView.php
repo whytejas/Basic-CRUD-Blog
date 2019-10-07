@@ -1,10 +1,11 @@
 <?php $title = 'Commentaires';
 ob_start(); ?>
 
-<p><a class="login" href="view/frontend/loginView.php">Espace Admin</a></p>
+<p><a class="accueil" href="./index.php">Accueil</a>
+<a class="login" href="./adminIndex.php?action=list">Espace Admin</a></p>
 
 <h4>"Billet simple pour l'Alaska"</h4>
-<p><a href="./index.php">Accueil</a></p>
+
 
 <div class="articles">
     <h3>

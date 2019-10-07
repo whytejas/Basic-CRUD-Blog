@@ -43,12 +43,23 @@ a {
 
 }
 
-a.login {
+a.accueil {
+    display: inline-block;
     color: green;
     text-decoration: underline;
-    position: fixed;
-
+    margin: 1%;
 }
+
+a.logout, a.login {
+    
+    float: right;
+    color: red;
+    text-decoration: underline;
+    margin-right: 1%;
+    
+}
+
+
 
 .commentaires {
     width: 50%;
@@ -68,11 +79,6 @@ a.login {
     font-weight: bold;
     text-align: center;
 
-}
-
-.login {
-    color: green;
-    margin: 1%;
 }
 
 .create {
@@ -107,3 +113,4 @@ form label {
 .formulaire form {
     margin-bottom: 2%;
 }
+

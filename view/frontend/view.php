@@ -3,7 +3,7 @@ $title = 'Jean Forteroche';
 
 ob_start(); ?>
 
-<p><a class="login" href="view/frontend/loginView.php">Espace Admin</a></p>
+<p><a class="login" href="./adminIndex.php?action=list">Espace Admin</a></p><br>
 <div class="intro">
     <h1>Bonjour ! </h1>
     <h2>Je suis Jean Forteroche <br>(acteur et écrivain)</h2>

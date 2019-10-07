@@ -6,18 +6,17 @@ require_once('model/commentManager.php');
 
 function passwordVerify($pseudo, $password) {
     $articleManager = new ArticleManager();
-    $userCheck = $articleManager -> verifyUser($pseudo);
-
-    if (password_verify($password, $userCheck['password_H']))  {
-        $_SESSION['pseudo'] = $_POST['pseudo'];
-        $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        header('Location: ./adminIndex.php?action=list');
+    $user = $articleManager -> verifyUser($pseudo);
+        
+    if (password_verify($password, $user['password_H']))  {
+        $_SESSION['pseudo'] = $pseudo;
+        $_SESSION['password'] = password_hash($password, PASSWORD_DEFAULT);
+        listArticles();
     }
     else {
 
-     throw new Exception("Vérifier votre pseudo et/ou mot de passe ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
-            
-
+        throw new Exception("Vérifier votre pseudo et/ou mot de passe ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
+        
     }
 
 }
@@ -85,7 +84,7 @@ function deletionCommentaire($articleId, $commentaireId)
     $articleManager = new ArticleManager();
     $commentManager = new CommentManager();
     $deletionComment =  $commentManager->deleteCommentaire($commentaireId);
-    
+
     header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
 
 }

@@ -4,7 +4,8 @@ $title = 'ESPACE ADMIN';
 
  ob_start(); ?>
 
-<p><a class="login" href="./index.php">Accueil</a></p>
+<p><a class="accueil" href="./index.php">Accueil</a>
+<a class="logout" href="./adminIndex.php?action=logout">Logout</a></p>
 <div>
     <h1>Bonjour Jean ! </h1>
     
@@ -32,7 +33,7 @@ $title = 'ESPACE ADMIN';
             <input type="text" id="titre" name="titre" /><br /><br />
             <label for="contenu">Contenu :</label><br />
             <textarea id="contenu" name="contenu" rows="20" cols="60"></textarea><br /><br />
-            <input type="submit" valeur="Envoyer"/>
+            <input type="submit" value="Envoyer"/>
         </div>
     </form>
 </div>
@@ -62,6 +63,8 @@ while ($donnees = $articles->fetch())
 
 <a href="./adminIndex.php?action=listCommentairesAModerer">Cliquez ici</a>
 </div>
+
+
 <?php
 
 $content = ob_get_clean();

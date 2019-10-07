@@ -1,14 +1,8 @@
 <?php 
-
-
 $title = 'Espace ADMIN';
 ob_start(); 
-
-
-
-
  ?>
-
+<p><a class="accueil" href="./../../index.php">Accueil</a></p>
     <div class="loginForm">
     <p><em>Veuillez entrer vos identifiants pour accéder à </em><br> l'ESPACE ADMIN :</p>
     <form class="login" action="./../../adminIndex.php?action=login" method="POST">

@@ -69,7 +69,7 @@ try {
 
 else {
 
-    listArticles(1, 3);
+    listArticles(1, 1);
 }
 
 }
