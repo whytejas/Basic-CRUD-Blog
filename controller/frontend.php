@@ -1,6 +1,6 @@
 <?php
-
-require_once('model/model.php');
+require_once('model/articleManager.php');
+require_once('model/commentManager.php');
 
 
 function listArticles()
@@ -39,9 +39,9 @@ function newCommentaire($articleId, $auteur, $commentaireContenu)
 
 function moderationCommentaire($articleId, $commentaireId)
 {
-    $adminArticleManager = new AdminArticleManager();
-    $adminCommentManager = new AdminCommentManager();
-    $modererComment =  $adminCommentManager->modererCommentaire($commentaireId);
+    $articleManager = new ArticleManager();
+    $commentManager = new CommentManager();
+    $modererComment =  $commentManager->modererCommentaire($commentaireId);
 
     header('Location: ./index.php?action=listCommentaires&id=' . $articleId);
 

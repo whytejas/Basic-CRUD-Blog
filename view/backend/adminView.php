@@ -45,7 +45,7 @@ $title = 'ESPACE ADMIN';
 
 <div class="articleTitles">
     <?php 
-while ($donnees = $adminArticles->fetch())
+while ($donnees = $articles->fetch())
 {
 ?>
 

@@ -8,7 +8,8 @@ h3,
 h4,
 .intro,
 .commentaires,
-.formulaire, .loginForm {
+.formulaire,
+.loginForm {
     text-align: center;
 }
 
@@ -87,16 +88,21 @@ a.login {
 .attention {
     color: red;
     font-weight: bold;
-    
+
 }
 
-form input, textarea {
+form input,
+textarea {
     border-radius: 5px;
     padding: 1%;
- 
+
 }
 
 form label {
     padding-bottom: 10%;
-   
+
+}
+
+.formulaire form {
+    margin-bottom: 2%;
 }

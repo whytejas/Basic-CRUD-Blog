@@ -1,42 +1,42 @@
 <?php
-
-require_once('model/model.php');
+session_start();
+require_once('model/articleManager.php');
+require_once('model/commentManager.php');
 
 
 function passwordVerify($pseudo, $password) {
-    $adminArticleManager = new AdminArticleManager();
-    $userCheck = $adminArticleManager -> verifyUser($pseudo, $password);
+    $articleManager = new ArticleManager();
+    $userCheck = $articleManager -> verifyUser($pseudo);
 
     if (password_verify($password, $userCheck['password_H']))  {
-
-        return true;
+        $_SESSION['pseudo'] = $_POST['pseudo'];
+        $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        header('Location: ./adminIndex.php?action=list');
     }
     else {
-        header('Location: view/frontend/loginView.php');
+
+     throw new Exception("Vérifier votre pseudo et/ou mot de passe ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
+            
+
     }
 
 }
 
 
+function listArticles(){
 
-function listArticles()
-{
-
-    $adminArticleManager = new AdminArticleManager();
-    $adminArticles = $adminArticleManager->getArticles();
+    $articleManager = new ArticleManager();
+    $articles = $articleManager->getArticles();
 
     require('view/backend/adminView.php');
 
-
 }
-
-
 
 
 function newArticle($titre, $contenu)
 {
-    $adminArticleManager = new AdminArticleManager();
-    $insertionArticle =  $adminArticleManager->createArticle($titre, $contenu);
+    $articleManager = new ArticleManager();
+    $insertionArticle =  $articleManager->createArticle($titre, $contenu);
 
     if ($insertionArticle === false) {
         throw new Exception("Impossible d\'ajouter l'article !");
@@ -50,8 +50,8 @@ function newArticle($titre, $contenu)
 
 function deletionArticle($articleId)
 {
-    $adminArticleManager = new AdminArticleManager();
-    $deletion =  $adminArticleManager->deleteArticle($articleId);
+    $articleManager = new ArticleManager();
+    $deletion =  $articleManager->deleteArticle($articleId);
     header('Location: ./adminIndex.php?action=list');
 
 }
@@ -59,16 +59,16 @@ function deletionArticle($articleId)
 
 function modificationArticle($articleId)
 {
-    $adminArticleManager = new AdminArticleManager();
-    $article = $adminArticleManager->getArticle($articleId);
+    $articleManager = new ArticleManager();
+    $article = $articleManager->getArticle($articleId);
     require('view/backend/adminModificationView.php');
 
 }
 
 function updateArticle($articleId, $modTitre, $modContenu)
 {
-    $adminArticleManager = new AdminArticleManager();
-    $updateArticle = $adminArticleManager->updateArticle($articleId, $modTitre, $modContenu);
+    $articleManager = new ArticleManager();
+    $updateArticle = $articleManager->updateArticle($articleId, $modTitre, $modContenu);
     
     if ($updateArticle === false) {
         throw new Exception("Impossible de modifier cet article !");
@@ -77,37 +77,37 @@ function updateArticle($articleId, $modTitre, $modContenu)
         header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
     }
    
-
 }
 
 
 function deletionCommentaire($articleId, $commentaireId)
 {
 
-    $adminCommentManager = new AdminCommentManager();
-    $deletionComment =  $adminCommentManager->deleteCommentaire($commentaireId);
+    $commentManager = new CommentManager();
+    $deletionComment =  $commentManager->deleteCommentaire($commentaireId);
     header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
-
 
 }
 
 
 
 function listCommentairesAModerer() {
-    $adminCommentManager = new AdminCommentManager();
-    $commentsAModerer =  $adminCommentManager->commentairesAModerer();
+    
+    $commentManager = new CommentManager();
+    $commentsAModerer =  $commentManager->commentairesAModerer();
     require('view/backend/adminCommentView.php');
 
 }
 
 
 function getArticleByTitre($articleId) {
-    $adminArticleManager = new AdminArticleManager();
-    $adminGetArticle = $adminArticleManager->getArticle($articleId);
+   
+    $articleManager = new ArticleManager();
+    $adminGetArticle = $articleManager->getArticle($articleId);
     $article = $adminGetArticle;
 
-    $adminCommentManager = new AdminCommentManager();
-    $adminGetCommentaires = $adminCommentManager->getCommentaires($articleId);
+    $commentManager = new CommentManager();
+    $adminGetCommentaires = $commentManager->getCommentaires($articleId);
     $commentaires = $adminGetCommentaires;
 
 
@@ -117,7 +117,6 @@ function getArticleByTitre($articleId) {
     else {
         require('view/backend/adminArticleView.php');
     }
-
 
 
 }

@@ -26,7 +26,7 @@
             <textarea id="contenu" name="contenu" rows="20" cols="60"><?= htmlspecialchars($article['contenu']) ?></textarea>
             
             <br /><br />
-            <input type="submit" valeur="Mettre à jour" onclick="return confirm('ATTENTION : La dernière version va être remplacée par celle-ci !! ')"/>
+            <input type="submit" value="Mettre à jour" onclick="return confirm('ATTENTION : La dernière version va être remplacée par celle-ci !! ')"/>
         </div>
     </form>
 </div>

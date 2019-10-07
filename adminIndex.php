@@ -1,26 +1,17 @@
 <?php
-session_start();
 require('controller/backend.php');
 
 
 try {
     
-    if (isset($_POST['pseudo'])  && isset($_POST['password'])){
+    if (!isset($_GET['action']) OR $_GET['action'] == 'login')  {
+
+        if (isset($_POST['pseudo'])  && isset($_POST['password'])){
        
         if  (!empty($_POST['pseudo']) AND !empty($_POST['password'])) {
             
-            if(passwordVerify($_POST['pseudo'], $_POST['password'])) {
-
-                $_SESSION['pseudo'] = $_POST['pseudo'];
-                $_SESSION['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                listArticles();
-            }
-
-            else {
-                throw new Exception("Vérifier votre pseudo et/ou mot de passe ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
-                header('Location: view/frontend/loginView.php');
-            }
-
+            passwordVerify($_POST['pseudo'], $_POST['password']); 
+            
         }
 
         else {
@@ -28,6 +19,8 @@ try {
         }
 
     }
+
+}
 
     elseif (isset($_SESSION['password']) && isset($_SESSION['pseudo'])) {
 
@@ -119,11 +112,12 @@ try {
             }
         }
 
-        elseif (!isset($_GET['action'])){
-            echo "NO";
-            listArticles();
-        }
+        // elseif (!isset($_GET['action'])){
+        //     listArticles();
+        // }
     }
+
+
 
     else {
         throw new Exception("Vous devez vous reconnecter ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
