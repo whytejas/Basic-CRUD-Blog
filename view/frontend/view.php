@@ -23,8 +23,8 @@ while ($donnees = $articles->fetch())
 
 <div class="articles">
     <h3>
-        <?php echo $donnees['id']. "  ". htmlspecialchars($donnees['titre']); ?>
-        <em>le <?php echo $donnees['date_article']; ?></em>
+        <?php echo htmlspecialchars($donnees['titre']); ?> <br> publié le 
+        <em><?php echo $donnees['date_article']; ?></em>
     </h3>
 
     <p>

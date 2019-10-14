@@ -7,7 +7,7 @@ $title = 'ESPACE ADMIN';
 <p><a class="accueil" href="./index.php">Accueil</a>
 <a class="logout" href="./adminIndex.php?action=logout">Logout</a></p>
 <div>
-    <h1>Bonjour Jean ! </h1>
+    <h1>Bonjour <?= $_SESSION['pseudo']?>! </h1>
     
     <span>Ici vous pouvez:
     <ul>
@@ -32,7 +32,7 @@ $title = 'ESPACE ADMIN';
             <label for="titre">Titre :</label><br />
             <input type="text" id="titre" name="titre" /><br /><br />
             <label for="contenu">Contenu :</label><br />
-            <textarea id="contenu" name="contenu" rows="20" cols="60"></textarea><br /><br />
+            <textarea class="mytextarea" id="contenu" name="contenu" rows="20" cols="60"></textarea><br /><br />
             <input type="submit" value="Envoyer"/>
         </div>
     </form>

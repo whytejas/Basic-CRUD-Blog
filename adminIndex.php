@@ -3,7 +3,11 @@ require('controller/backend.php');
 
 
 try {
-    
+    if (isset($_GET['action']) && $_GET['action'] == 'loginform') {
+        showloginform();
+        return;
+    }
+
     if (!isset($_GET['action']) OR $_GET['action'] == 'login')  {
         
         if (isset($_POST['pseudo'])  && isset($_POST['password'])){
@@ -14,12 +18,16 @@ try {
             
             }
             else {
-                throw new Exception('Les deux identifiants sont obligatoires.  Essayez ici: <a href="view/frontend/loginView.php"> Connexion</a>  ');
+                throw new Exception('Les deux identifiants sont obligatoires.  Essayez ici: <a href="adminIndex.php?action=loginform"> Connexion</a>  ');
             }
         }
+        else {
+            header('Location: adminIndex.php?action=loginform');
+        }
+
     }
 
-    elseif (isset($_SESSION['password']) && isset($_SESSION['pseudo'])) {
+    elseif (isset($_SESSION['pseudo'])) {
         
         if (isset($_GET['action'])) {
             
@@ -107,8 +115,9 @@ try {
                     break;
                 
                 case 'logout':
-                    session_destroy();
-                    echo "<h1>Votre session est terminée. <br><br> Vous devez vous reconnecter ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a></h1> ";
+                    // session_destroy();
+                    unset($_SESSION['pseudo']);
+                    header('Location: adminIndex.php?action=loginform');
                     break;
             }
         }
@@ -116,10 +125,9 @@ try {
     }
 
 
-
     else {
-        throw new Exception("Vous devez vous connecter ! <br><br>Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
-        header('Location: view/frontend/loginView.php');
+        // throw new Exception("Vous devez vous connecter ! <br><br>Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
+        header('Location: adminIndex.php?action=loginform');
     }
 
 

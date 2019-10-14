@@ -4,18 +4,22 @@ require_once('model/articleManager.php');
 require_once('model/commentManager.php');
 
 
+function showloginform() {
+    require("view/frontend/loginView.php");
+}
+
 function passwordVerify($pseudo, $password) {
     $articleManager = new ArticleManager();
     $user = $articleManager -> verifyUser($pseudo);
         
     if (password_verify($password, $user['password_H']))  {
         $_SESSION['pseudo'] = $pseudo;
-        $_SESSION['password'] = password_hash($password, PASSWORD_DEFAULT);
+        // $_SESSION['password'] = password_hash($password, PASSWORD_DEFAULT);
         listArticles();
     }
     else {
 
-        throw new Exception("Vérifier votre pseudo et/ou mot de passe ! Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
+        throw new Exception("Vérifier votre pseudo et/ou mot de passe ! Essayez ici: <a href='adminIndex.php?action=loginform'>Connexion</a> ");
         
     }
 
@@ -117,7 +121,6 @@ function getArticleByTitre($articleId) {
     else {
         require('view/backend/adminArticleView.php');
     }
-
 
 }
 

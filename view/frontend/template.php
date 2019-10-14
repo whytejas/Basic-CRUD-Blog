@@ -12,12 +12,9 @@
         <script>
             tinymce.init({
                 selector: '.mytextarea',
-                invalid_elements : 'strong,em,p,div,br',
-                force_br_newlines : false,
-                force_p_newlines : false,
-                forced_root_block : '',
+                menubar: false,
                 language: 'fr_FR',
-                language_url : 'public/fr_FR.js'
+                language_url : 'public/js/fr_FR.js'
             });
         </script>
 </head>

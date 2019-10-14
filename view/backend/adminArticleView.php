@@ -5,18 +5,18 @@
 <a class="logout" href="./adminIndex.php?action=logout">Logout</a></p>
 
 <h4>"Billet simple pour l'Alaska"</h4>
-<h3><?php echo $article['titre']; ?></h3>
+
 
 <p><em><a href="./adminIndex.php?action=list">Retourner vers l'Espace Admin</a></em></p>
 
 <div class="articles">
     <h3>
-        <?= htmlspecialchars($article['titre']) ?>
-        <em>le <?= $article['date_creation'] ?></em>
+        <?= htmlspecialchars($article['titre']) ?> <br> publié le 
+        <em> <?= $article['date_creation'] ?></em>
     </h3>
 
     <p>
-        <?= nl2br(htmlspecialchars($article['contenu'])) ;
+        <?= nl2br($article['contenu']) ;
 
 
 
