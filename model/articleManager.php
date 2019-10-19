@@ -25,7 +25,7 @@ class ArticleManager extends Manager {
     public function paginateArticles($start, $perPage) {
 
         $bdd = $this->bddConnect();
-        $articles = $bdd->prepare("SELECT * FROM Articles LIMIT :start, :perPage " );
+        $articles = $bdd->prepare("SELECT * FROM Articles ORDER BY date_article DESC LIMIT :start, :perPage  " );
         $articles->bindParam(':start', $start, PDO::PARAM_INT);
         $articles->bindParam(':perPage', $perPage, PDO::PARAM_INT);
         $articles->execute();

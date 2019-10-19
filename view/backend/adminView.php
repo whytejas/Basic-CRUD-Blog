@@ -7,7 +7,7 @@ $title = 'ESPACE ADMIN';
 <p><a class="accueil" href="./index.php">Accueil</a>
 <a class="logout" href="./adminIndex.php?action=logout">Logout</a></p>
 <div class="intro">
-    <h1>Bonjour <?= $_SESSION['pseudo']?>! </h1>
+    <h1>Bonjour Jean ! </h1>
     
     <span>Ici vous pouvez:
     <ul class="list">

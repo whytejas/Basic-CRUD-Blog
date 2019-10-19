@@ -18,7 +18,12 @@ h4,
     text-align: center;
 }
 
-
+.list {
+    text-align:left;
+    width: 20%;
+    margin-left:auto;
+    margin-right:auto;
+}
 
 h3 {
     background-color: black;
@@ -28,18 +33,18 @@ h3 {
     padding: 1%;
 }
 
-.articles p {
+.articles  {
     color: black;
     background-color: rgba(156, 236, 136, 0.7);
     margin-top: 0px;
-    padding: 2%;
+    margin-bottom: 25px;
+    margin-left:auto;
+    margin-right:auto;
+    padding:2%;
     text-align: justify;
+    width: 70%;
 }
 
-.articles {
-    width: 70%;
-    margin: auto;
-}
 
 a {
     text-decoration: none;

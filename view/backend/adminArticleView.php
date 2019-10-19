@@ -23,9 +23,8 @@
 
 ?>
 
-
-        <br>
-        <br> 
+<br>
+<br>
         <em><a href="./adminIndex.php?action=deleteArticle&id=<?php echo $article['id']; ?>" onclick="return confirm('Êtes-vous sûr et certain? Cette action est permanente !')">Supprimer</a></em>
 
         <br>

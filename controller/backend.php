@@ -4,7 +4,7 @@ require_once('model/articleManager.php');
 require_once('model/commentManager.php');
 
 
-function showloginform() {
+function showLoginForm() {
     require("view/frontend/loginView.php");
 }
 

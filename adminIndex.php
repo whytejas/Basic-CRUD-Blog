@@ -4,7 +4,7 @@ require('controller/backend.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] == 'loginform') {
-        showloginform();
+        showLoginForm();
         return;
     }
 
