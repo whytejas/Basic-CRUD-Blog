@@ -9,12 +9,12 @@ ob_start(); ?>
 
 <div class="articles">
     <h3>
-        <?= htmlspecialchars($article['titre']) ?>
+        <?= ($article['titre']) ?>
         <em>le <?= $article['date_creation'] ?></em>
     </h3>
 
     <p>
-        <?= nl2br(htmlspecialchars($article['contenu'])) ?>
+        <?= nl2br($article['contenu']) ?>
     </p>
 </div>
 <div class="formulaire">

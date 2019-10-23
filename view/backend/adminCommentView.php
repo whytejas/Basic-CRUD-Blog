@@ -12,6 +12,7 @@
 if ($commentsAModerer) {
 while ($commentsSignales = $commentsAModerer->fetch())
 {
+
 ?>
 
 <ul>

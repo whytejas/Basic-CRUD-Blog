@@ -85,6 +85,12 @@ class ArticleManager extends Manager {
         
         $bdd = $this->bddConnect();
 
+        $commentReq = $bdd->prepare('DELETE FROM Commentaires 
+                    WHERE EXISTS (SELECT *
+                      FROM Articles
+                      WHERE ? = Commentaires.id_article)');
+        $commentReq->execute(array($articleId));  
+                   
         $req = $bdd->prepare('DELETE FROM Articles WHERE id=?');
         $req->execute(array($articleId));
 

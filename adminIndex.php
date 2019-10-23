@@ -42,7 +42,7 @@ try {
                         newArticle($_POST['titre'], $_POST['contenu']);
                     }
                     else {
-                        throw new Exception('Impossible d\'ajouter l\'article ! ');
+                        throw new Exception("Impossible d'ajouter l'article !");
                     }
                     break;
 

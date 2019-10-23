@@ -88,17 +88,19 @@ function deletionCommentaire($articleId, $commentaireId)
     $articleManager = new ArticleManager();
     $commentManager = new CommentManager();
     $deletionComment =  $commentManager->deleteCommentaire($commentaireId);
-
-    header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
+    
+    header('Location: ./adminIndex.php?action=listCommentairesAModerer');
+    // header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
 
 }
 
 
 
 function listCommentairesAModerer() {
-    
+    $articleManager = new ArticleManager();
     $commentManager = new CommentManager();
     $commentsAModerer =  $commentManager->commentairesAModerer();
+  
     require('view/backend/adminCommentView.php');
 
 }
@@ -116,7 +118,7 @@ function getArticleByTitre($articleId) {
 
 
     if ($article === false) {
-        throw new Exception("Impossible d\'ajouter l'article !");
+        throw new Exception("Impossible d'ajouter l'article !");
     }
     else {
         require('view/backend/adminArticleView.php');
