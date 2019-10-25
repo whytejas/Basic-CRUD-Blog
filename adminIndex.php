@@ -1,7 +1,6 @@
 <?php
 require('controller/backend.php');
 
-
 try {
     if (isset($_GET['action']) && $_GET['action'] == 'loginform') {
         showLoginForm();
@@ -124,15 +123,12 @@ try {
         
     }
 
-
     else {
-        // throw new Exception("Vous devez vous connecter ! <br><br>Essayez ici: <a href='view/frontend/loginView.php'> Connexion</a> ");
+       
         header('Location: adminIndex.php?action=loginform');
     }
 
-
 }
-
 
 catch (Exception $e) {
     echo "<h1>". $e->getMessage() . "</h1>";

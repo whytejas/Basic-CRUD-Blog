@@ -24,11 +24,12 @@ class CommentManager extends Manager {
     }
 
     public function modererCommentaire($commentaireId) {
+        
         $bdd = $this->bddConnect();
-            $req = $bdd->prepare('UPDATE Commentaires SET moderation = 1 WHERE id = ?');
-            $req->execute(array($commentaireId));
+        $req = $bdd->prepare('UPDATE Commentaires SET moderation = 1 WHERE id = ?');
+        $req->execute(array($commentaireId));
           
-            return $req;
+        return $req;
     
     }
 

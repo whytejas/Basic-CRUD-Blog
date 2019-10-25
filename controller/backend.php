@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('model/userManager.php');
 require_once('model/articleManager.php');
 require_once('model/commentManager.php');
 
@@ -9,8 +10,8 @@ function showLoginForm() {
 }
 
 function passwordVerify($pseudo, $password) {
-    $articleManager = new ArticleManager();
-    $user = $articleManager -> verifyUser($pseudo);
+    $userManager = new userManager();
+    $user = $userManager -> verifyUser($pseudo);
         
     if (password_verify($password, $user['password_H']))  {
         $_SESSION['pseudo'] = $pseudo;
@@ -89,8 +90,8 @@ function deletionCommentaire($articleId, $commentaireId)
     $commentManager = new CommentManager();
     $deletionComment =  $commentManager->deleteCommentaire($commentaireId);
     
-    header('Location: ./adminIndex.php?action=listCommentairesAModerer');
-    // header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
+    // header('Location: ./adminIndex.php?action=listCommentairesAModerer');
+    header('Location: ./adminIndex.php?action=getArticle&id=' .$articleId);
 
 }
 

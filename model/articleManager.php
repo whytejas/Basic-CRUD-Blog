@@ -3,16 +3,6 @@
 require_once('manager.php');
 
 class ArticleManager extends Manager {
-
-    public function verifyUser($pseudo)  {
-        $bdd = $this->bddConnect();
-        $req= $bdd->prepare('SELECT password_H FROM Utilisateurs WHERE pseudo=? ');
-        $req->execute(array($pseudo));
-        $user = $req->fetch();
-        
-        return $user;
-
-    }  
     
     public function getArticles() {
 
@@ -85,10 +75,7 @@ class ArticleManager extends Manager {
         
         $bdd = $this->bddConnect();
 
-        $commentReq = $bdd->prepare('DELETE FROM Commentaires 
-                    WHERE EXISTS (SELECT *
-                      FROM Articles
-                      WHERE ? = Commentaires.id_article)');
+        $commentReq = $bdd->prepare('DELETE FROM Commentaires WHERE EXISTS (SELECT * FROM Articles WHERE ? = Commentaires.id_article)');
         $commentReq->execute(array($articleId));  
                    
         $req = $bdd->prepare('DELETE FROM Articles WHERE id=?');

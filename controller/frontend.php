@@ -5,25 +5,26 @@ require_once('model/commentManager.php');
 
 function listArticles($page, $perPage)
 {
-    if ($page > 1) {
+    
+    $articleManager = new ArticleManager();
+    $total = $articleManager->totalArticles();
+    $totalPages = ceil($total/$perPage);
+
+    if ($page > 1 && $page < $totalPages) {
         $start = ($page - $perPage) * $perPage;  
     }
-    
     else {
         $start = 0;
     }
-    
-    $articleManager = new ArticleManager();
     $articles = $articleManager->paginateArticles($start, $perPage);
-    
-    $total = $articleManager->totalArticles();
-    $totalPages = ceil($total/$perPage);
-    
+
     require('view/frontend/view.php');
+ 
 }
 
 function listCommentaires()
 {
+   
     $articleManager = new ArticleManager();
     $commentManager = new CommentManager();
     $article = $articleManager->getArticle($_GET['id']);

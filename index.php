@@ -1,7 +1,6 @@
 <?php
 require('controller/frontend.php');
 
-
 try {
 
     if (isset($_GET['action'])) {
@@ -9,7 +8,7 @@ try {
         switch($_GET['action']) {
 
             case 'listArticles': 
-                if ((isset($_GET['page'])) && ((int)$_GET['page'])){
+                if ((isset($_GET['page'])) && ((int)$_GET['page']) && ((int)$_GET['page'] <= 50) && ((int)$_GET['page'] != 0)){
                     $page = $_GET['page'];
                     
                     if ((isset($_GET['perpage'])) && ((int)$_GET['perpage']) && $_GET['perpage'] <= 10) {
@@ -18,8 +17,14 @@ try {
                     else { 
                         
                         $perPage = 1;
-                    } 
-                listArticles($page, $perPage);        
+                    }
+                    
+                    listArticles($page, $perPage);  
+                }
+                else {
+                    $page = 1; 
+                    $perPage = 1;
+                    listArticles($page, $perPage);  
                 }
                 break;
         
@@ -32,7 +37,6 @@ try {
                     throw new Exception('Aucun identifiant de billet envoyé');
                 }
                 break;
-
 
             case 'newCommentaire' :
                 if (isset($_GET['id']) && $_GET['id'] >= 0) {
@@ -47,7 +51,6 @@ try {
                     throw new Exception('Aucun identifiant de billet envoyé');
                 }
                 break;
-    
 
             case 'signalCommentaire':
                 if (isset($_GET['id']) && $_GET['id'] >= 0) {
@@ -67,10 +70,9 @@ try {
         }
     }
 
-else {
-
-    listArticles(1, 1);
-}
+    else {
+        listArticles(1, 1);
+    }
 
 }
 
